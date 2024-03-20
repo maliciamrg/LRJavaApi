@@ -1,0 +1,25 @@
+spring:
+    application:
+        name: LRJavaApi
+    datasource:
+
+    jpa:
+        properties:
+            hibernate:
+                show_sql: true
+                format_sql: true
+            org:
+                hibernate:
+                    SQL:
+                        logger: DEBUG
+                    type: TRACE
+        database-platform: com.maliciamrg.lrjavaapi.repository.adobeimages.SQLiteDataTypesConfig
+        hibernate:
+            naming:
+                physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+logging:
+    level:
+        org:
+            springframework:
+                data:
+                    jpa: DEBUG
