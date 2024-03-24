@@ -3,10 +3,7 @@ package com.maliciamrg.lrjavaapi.controller;
 import com.maliciamrg.lrjavaapi.adobeimages.AdobeImages;
 import com.maliciamrg.lrjavaapi.adobeimages.AdobeImageServices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,17 +19,34 @@ public class AdobeImagesController {
         this.adobeImageServices = adobeImageServices;
     }
 
-    @GetMapping(value = "/{idLocal}")
-    public Optional<AdobeImages> getAdobeImagesById(@PathVariable("idLocal") Integer idLocal) {
-        Optional<AdobeImages> adobeImages = adobeImageServices.getAdobeImagesById(idLocal);
+    @GetMapping(path = "{idGlobal}")
+    public Optional<AdobeImages> getAdobeImageById(@PathVariable("idGlobal") String idGlobal) {
+        Optional<AdobeImages> adobeImages = adobeImageServices.getAdobeImageById(idGlobal);
         return adobeImages ;
     }
-    @GetMapping(value = "/all")
-    public List<String> getAdobeImages() {
+    @GetMapping
+    public List<AdobeImages> getAdobeImages() {
         List<AdobeImages> adobeImages = adobeImageServices.getAdobeImages();
         List<String> mythings = adobeImages.stream()
                 .map(element-> element.toString())
                 .collect(Collectors.toList());
-        return mythings ;
+        return adobeImages ;
+    }
+
+    @PostMapping
+    public void addImage(@RequestBody AdobeImages adobeImages) throws IllegalAccessException {
+        adobeImageServices.addNewImage(adobeImages);
+    }
+
+    @DeleteMapping(path = "{idGlobal}")
+    public void deleteImage(@PathVariable("idGlobal") String idGlobal) {
+        adobeImageServices.deleteImage(idGlobal);
+    }
+
+    @PutMapping(path = "{idGlobal}")
+    public void updateImage(@PathVariable("idGlobal") String idGlobal,
+                            @RequestParam(required = false) Integer pick,
+                            @RequestParam(required = false) String fileFormat) {
+        adobeImageServices.updateImage(idGlobal,pick,fileFormat);
     }
 }
