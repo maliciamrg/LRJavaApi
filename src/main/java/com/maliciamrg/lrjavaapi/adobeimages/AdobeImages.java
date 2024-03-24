@@ -4,9 +4,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Adobe_images")
-@NamedQueries({
-        @NamedQuery(name = "AdobeImages.countBy", query = "select count(a) from AdobeImages a")
-})
 public class AdobeImages {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
