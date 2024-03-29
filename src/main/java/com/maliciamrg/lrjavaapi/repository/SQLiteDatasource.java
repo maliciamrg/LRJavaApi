@@ -1,4 +1,4 @@
-package com.maliciamrg.lrjavaapi.repository.adobeimages;
+package com.maliciamrg.lrjavaapi.repository;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

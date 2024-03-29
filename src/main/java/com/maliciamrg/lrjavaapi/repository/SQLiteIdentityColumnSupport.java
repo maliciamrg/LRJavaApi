@@ -1,4 +1,4 @@
-package com.maliciamrg.lrjavaapi.repository.adobeimages;
+package com.maliciamrg.lrjavaapi.repository;
 
 import org.hibernate.MappingException;
 import org.hibernate.dialect.identity.IdentityColumnSupportImpl;

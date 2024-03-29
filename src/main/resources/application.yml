@@ -13,7 +13,7 @@ spring:
                     SQL:
                         logger: DEBUG
                     type: TRACE
-        database-platform: com.maliciamrg.lrjavaapi.repository.adobeimages.SQLiteDataTypesConfig
+        database-platform: com.maliciamrg.lrjavaapi.repository.SQLiteDataTypesConfig
         hibernate:
             naming:
                 physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl

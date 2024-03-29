@@ -2,6 +2,7 @@ package com.maliciamrg.lrjavaapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.util.StringUtils;
 
@@ -13,8 +14,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
+@EnableSwagger2
 public class LrJavaApiApplication {
 
 	private static final String HTTP_DEFAULT_PORT = "8080" ;
@@ -48,11 +55,11 @@ public class LrJavaApiApplication {
 						"Application '{} ({})' is running!\n\tAccess URLs:\n\t" +
 						"Local: \t\t{}://localhost:{}{}\n\t" +
 						"External: \t{}://{}:{}{}\n\t" +
-						"Ip for Testing: \t{}\n\t (manual)" +
+						"Ip for Testing: \t{}\t (manual)\n\t" +
 						"Profile(s): \t{}\n\t" +
 						"---------------------------------------------------------------\n\t"+
-						"Swagger: \t{}://{}:{}{}swagger-ui.html\n\t" +
-						"Swagger for testing: \t{}swagger-ui.html\n\t" ,
+						"Swagger: \t{}://{}:{}{}swagger-ui/index.html\n\t" +
+						"Swagger for testing: \t{}swagger-ui/index.html\n\t" ,
 				env.getProperty("spring.application.name"),
 				env.getProperty("application.version"),
 				protocol,
@@ -70,4 +77,5 @@ public class LrJavaApiApplication {
 				contextPath,
 				ipOutsideDocker);
 	}
+
 }
