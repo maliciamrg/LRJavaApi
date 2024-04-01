@@ -1,4 +1,4 @@
-package com.maliciamrg.lrjavaapi.repository;
+package com.maliciamrg.lrjavaapi.infrastructure.database;
 
 import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.identity.IdentityColumnSupport;

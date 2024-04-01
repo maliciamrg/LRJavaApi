@@ -11,8 +11,14 @@
     <groupId>com.maliciamrg</groupId>
     <artifactId>LRJavaApi</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
     <name>LRJavaApi</name>
     <description>Ligthroom APi in Java</description>
+
+    <modules>
+        <module>domain</module>
+        <module>infrastructure</module>
+    </modules>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -118,13 +124,13 @@
 
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+<!--    <build>-->
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </build>-->
 
 </project>
