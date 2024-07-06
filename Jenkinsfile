@@ -26,9 +26,7 @@ pipeline {
         stage("install Docker Image into 200") {
             steps {
                 script {
-                    dir("photoOrganize-infrastructure") {
-                        sh "docker --context remote compose up -d"
-                    }
+                    sh "docker --context remote compose up -d"
                 }
             }
         }
