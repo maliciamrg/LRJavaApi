@@ -1,0 +1,9 @@
+version: '2.2'
+services:
+    photoOrganize:
+        image: maliciamrg/lrcatapi:0.0.1-SNAPSHOT
+        ports:
+            - 8091:8080
+        container_name: photoOrganize
+        volumes:
+            - '/Photo/70_Catalog_Phototheque:/Lrcat'
