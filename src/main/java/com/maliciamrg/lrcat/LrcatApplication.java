@@ -5,7 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.util.StringUtils;
 
@@ -44,16 +47,17 @@ public class LrcatApplication {
             contextPath = "/";
         }
         final String hosttAddress = InetAddress.getLocalHost().getHostAddress();
-        final String ipOutsideDocker = env.getProperty("spring.ipOutsideDocker");
-        logger.info("\n---------------------------------------------------------------\n\t" +
-                        "Application '{} ({})' is running!\n\tAccess URLs:\n\t" +
-                        "Local: \t\t{}://localhost:{}{}\n\t" +
-                        "External: \t{}://{}:{}{}\n\t" +
-                        "Ip for Testing: \t{}\t (manual)\n\t" +
+        final String ipOutsideDocker = env.getProperty("application.ipWan");
+        logger.info("\n\t---------------------------------------------------------------\n\t" +
+                        "Application '{} ({})' is running!\n\t" +
+                        "Access URLs:\n\t" +
+                        "  Local: \t\t{}://localhost:{}{}\n\t" +
+                        "  External: \t{}://{}:{}{}\n\t" +
+                        "  IpWan: \t\t{}://{}\t (manual)\n\t" +
                         "Profile(s): \t{}\n\t" +
                         "---------------------------------------------------------------\n\t" +
                         "Swagger: \t{}://{}:{}{}swagger-ui/index.html\n\t" +
-                        "Swagger for testing: \t{}swagger-ui/index.html\n\t",
+                        "Swagger IpWan: \t{}://{}/swagger-ui/index.html\n\t",
                 env.getProperty("spring.application.name"),
                 env.getProperty("application.version"),
                 protocol,
@@ -63,13 +67,23 @@ public class LrcatApplication {
                 hosttAddress,
                 serverPort,
                 contextPath,
+                protocol,
                 ipOutsideDocker,
                 env.getActiveProfiles(),
                 protocol,
                 hosttAddress,
                 serverPort,
                 contextPath,
+                protocol,
                 ipOutsideDocker);
     }
-
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
+        PropertySourcesPlaceholderConfigurer propsConfig
+                = new PropertySourcesPlaceholderConfigurer();
+        propsConfig.setLocation(new ClassPathResource("git.properties"));
+        propsConfig.setIgnoreResourceNotFound(true);
+        propsConfig.setIgnoreUnresolvablePlaceholders(true);
+        return propsConfig;
+    }
 }
