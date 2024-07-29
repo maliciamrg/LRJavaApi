@@ -3,7 +3,6 @@ package com.maliciamrg.lrcat.controller;
 
 import com.maliciamrg.lrcat.model.AgLibraryFile;
 import com.maliciamrg.lrcat.service.AgLibraryFileService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,19 +13,33 @@ import java.util.List;
 public class AgLibraryFileController {
 
 
-    @Autowired
-    private AgLibraryFileService agLibraryFileService;
+    private final AgLibraryFileService agLibraryFileService;
+
+    public AgLibraryFileController(AgLibraryFileService agLibraryFileService) {
+        this.agLibraryFileService = agLibraryFileService;
+    }
 
     @GetMapping
     public List<AgLibraryFile> getAllAgLibraryFiles() {
         return agLibraryFileService.getAllAgLibraryFiles();
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<AgLibraryFile>> getAgLibraryFileByRootFolder(@RequestParam Integer rootFolder) {
+
+        List<AgLibraryFile> agLibraryFileArray = agLibraryFileService.getAgLibraryFileByFolder(rootFolder);
+        if (agLibraryFileArray != null) {
+            return ResponseEntity.ok(agLibraryFileArray);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<AgLibraryFile> getAgLibraryFileById(@PathVariable Long id) {
-        AgLibraryFile user = agLibraryFileService.getAgLibraryFileById(id);
-        if (user != null) {
-            return ResponseEntity.ok(user);
+        AgLibraryFile agLibraryFile = agLibraryFileService.getAgLibraryFileById(id);
+        if (agLibraryFile != null) {
+            return ResponseEntity.ok(agLibraryFile);
         } else {
             return ResponseEntity.notFound().build();
         }
